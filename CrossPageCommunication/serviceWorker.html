@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <button id="tab">新开 Tab</button>
+  <button id="l-btn">发送消息</button>
+  <script>
+    let currentServiceWorker = null;
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./utils/sw.js', '.').then(function (registration) {
+          console.log('Service Worker 注册成功');
+          if (navigator.serviceWorker.controller) {
+            currentServiceWorker = navigator.serviceWorker.controller;
+          } else {
+            currentServiceWorker = registration.active;
+          }
+      });
+    }
+    
+    // 监听消息
+    navigator.serviceWorker.addEventListener('message', function (e) {
+        const data = e.data;
+        console.log(data);
+    });
+
+    document.getElementById('l-btn').onclick = function () {
+      currentServiceWorker.postMessage('测试，传送消息，我发送消息啦。。。');
+    };
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <button id="tab">新开 Tab</button>
+  <button id="l-btn">触发 LocalStorage 更新</button>
+  <button id="s-btn">触发 SessionStorage 更新</button>
+  <script>
+    window.onstorage = function(e) {
+      console.log(`The ${e.key}  key has been changed from ${e.oldValue}  to  ${e.newValue} .`);
+    };
+
+    document.getElementById('tab').onclick = function () {
+      window.open('xxx');
+    }
+
+    document.getElementById('l-btn').onclick = function () {
+      localStorage.setItem('storage1', Date.now())
+    }
+
+    document.getElementById('s-btn').onclick = function () {
+      sessionStorage.setItem('storage1', Date.now())
+    }
+  </script>
+</body>
+</html>
