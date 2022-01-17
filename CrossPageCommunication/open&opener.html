@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="tab">新开 Tab</button>
+  <button id="l-btn">发送消息</button>
+  <script>
+    // 收集 window 对象：多个打开页面，打开一个页面就需要将打开的 window 对象收集起来，以便于发布广播
+    let windowOpens = [];
+    document.getElementById('tab').onclick = function () {
+      // IP 地址为本地起的服务
+      const windowOpen = window.open('http://127.0.0.1:5500/CrossPageCommunication/open&opener.html');
+      windowOpens.push(windowOpen);
+    }
+
+    document.getElementById('l-btn').onclick = function () {
+      const data = {};
+      // 发送消息之前，先进行已关闭 Tab 的过滤
+      windowOpens = windowOpens.filter((window) => !window.closed);
+
+      if (windowOpens.length > 0) {
+        // 数据打一个标记
+        data.tag = false;
+        data.message = '测试，传送消息，我发送消息啦。。。'
+        windowOpens.forEach((window) => window.postMessage(data));
+      }
+      if (window.opener && !window.opener.closed) {
+        data.tag = true;
+        window.opener.postMessage(data);
+      }
+    }
+
+    window.addEventListener('message', function (e) {
+      const data = e.data;
+      console.log('我接受到消息了：', data.message);
+      // 避免消息回传
+      if (window.opener && !window.opener.closed && data.tag) {
+        window.opener.postMessage(data);
+      }
+      // 过滤掉已经关闭的 Tab
+      windowOpens = windowOpens.filter((window) => !window.closed);
+      // 避免消息回传
+      if (windowOpens && !data.tag) {
+        windowOpens.forEach((window) => window.postMessage(data));
+      }
+    });
+  </script>
+</body>
+
+</html>

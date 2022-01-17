@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="tab">新开 Tab</button>
+  <button id="l-btn">发送消息</button>
+  <script>
+    // 收集 window 对象：多个打开页面，打开一个页面就需要将打开的 window 对象收集起来，以便于发布广播
+    let windowOpens = [];
+    document.getElementById('tab').onclick = function () {
+      // IP 地址为本地起的服务
+      const windowOpen = window.open('http://127.0.0.1:5500/CrossPageCommunication/hashChange.html');
+    }
+
+    document.getElementById('l-btn').onclick = function () {
+      location.hash = `#${ Date.now()}`;
+    }
+
+    window.addEventListener('hashchange', function () {
+      console.log('The hash has changed!')
+    }, false);
+  </script>
+</body>
+
+</html>

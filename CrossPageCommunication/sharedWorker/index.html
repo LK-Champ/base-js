@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>共享线程 Shared Worker</title>
+</head>
+
+<body>
+  <button id="tab">新开 Tab</button>
+  <button id="l-btn">点赞</button>
+  <p><span id="likedCount">还没有人点赞</span></span>👍</p>
+  <script>
+    let likedCountEl = document.querySelector("#likedCount");
+
+    let worker = new SharedWorker("./sharedWorker.js");
+
+    console.log('worker.port', worker.port);
+
+    worker.port.start();
+
+    // 监听消息
+    worker.port.onmessage = function (val) {
+      likedCountEl.innerHTML = val.data;
+    };
+
+    document.getElementById('tab').onclick = function () {
+      // IP 地址为本地起的服务
+      const windowOpen = window.open('http://127.0.0.1:5500/CrossPageCommunication/sharedWorker/index.html');
+    }
+
+    document.getElementById('l-btn').onclick = function () {
+      worker.port.postMessage('点赞了');
+    };
+  </script>
+</body>
+
+</html>
