@@ -10,6 +10,7 @@ const parametersInsertPlugin = ({ types, template }, options, dirname) => {
                 if (path.node.isNew) {
                     return;
                 }
+                console.log(node.scope);
                 const calleeName = path.get('callee').toString();
                 if (targetCalleeName.includes(calleeName)) {
                     const { line, column } = path.node.loc.start;
