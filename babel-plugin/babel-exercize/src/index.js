@@ -29,15 +29,14 @@ const ast = parser.parse(sourceCode, {
     plugins: ['jsx']
 });
 
+const targetCalleeName = ['log', 'info', 'error', 'debug'].map(item => `console.${item}`);
 traverse(ast, {
     CallExpression(path) {
-        if (types.isMemberExpression(path.node.callee)
-            && path.node.callee.object.name === 'console'
-            && path.node.callee.property.name === 'log'
-        ) {
-            path.node.arguments.unshift(types.expressionStatement(`var a = 1`))
+        const calleeName = generate(path.node.callee).code;
+        if (targetCalleeName.includes(calleeName)) {
+            const { line, column } = path.node.loc.start;
+            path.node.arguments.unshift(types.stringLiteral(`filename: (${line}, ${column})`))
         }
-        // console.log(path.node.callee);
     }
 });
 
