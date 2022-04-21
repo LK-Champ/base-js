@@ -41,8 +41,7 @@ const ast = parser.parse(sourceCode, {
 // });
 
 traverse(ast, {
-  Statement(path) {
-    const getSibling = path.find((a) => {console.log(a);});
-    console.log(getSibling);
-  }
-})
+  Identifier(path) {
+    console.log(path.scope);
+  },
+});

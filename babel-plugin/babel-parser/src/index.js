@@ -11,7 +11,7 @@ const ast = parser.parse(sourceCode, {
   sourceType: 'unambiguous'
 });
 
-const astExpression = parser.parseExpression(sourceCode)
+// const astExpression = parser.parseExpression(sourceCode)
 
 console.log(ast);
-console.log(astExpression);
+// console.log(astExpression);
