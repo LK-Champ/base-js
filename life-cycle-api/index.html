@@ -13,22 +13,9 @@
     <input id="input" />
   </div>
   <script>
-    "use strict";
-    console.log(this);
+    setInterval(() => {
+      console.log(1);
+    }, 1000)
   </script>
-  <!-- <script>
-    function blur(e) {
-      console.log("blur:", e);
-    }
-    function focus(e) {
-      console.log("focus:", e);
-    }
-    document.getElementById('input').onblur = function() {
-      console.log(1);
-    };
-    document.getElementById('input').onfocus = function() {
-      console.log(1);
-    };
-  </script> -->
 </body>
 </html>
