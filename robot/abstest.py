@@ -25,3 +25,11 @@ def fact_iter(num, product = 1):
   if num == 1:
     return product;
   return fact_iter(num -1, product * num)
+
+def fib(max):
+  n, a, b = 0, 0, 1
+  while n < max:
+    print(b)
+    a, b = b, a + b
+    n = n + 1
+  return 'done'
