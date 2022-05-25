@@ -1,0 +1,9 @@
+{
+  "name": "image-op",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "node-pngquant-native": "^2.2.0"
+  }
+}
