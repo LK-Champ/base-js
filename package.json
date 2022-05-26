@@ -8,5 +8,9 @@
   "devDependencies": {
     "eslint": "^8.7.0",
     "eslint-plugin-react": "^7.28.0"
+  },
+  "dependencies": {
+    "jpegtran": "^2.0.0",
+    "jpegtran-bin": "^7.0.0"
   }
 }
