@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            height: 1024px;
+            width: 1024px;
+        }
+        img {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+        
+        img::after {
+            content: "";
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: url(1.png) no-repeat center;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img src="">
+    </div>
+</body>
+<script>
+    setTimeout(function() {
+        document.querySelectorAll("img")[0].src = '2.png';
+    }, 3000);
+</script>
+
+</html>

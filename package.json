@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "jpegtran": "^2.0.0",
-    "jpegtran-bin": "^7.0.0"
+    "jpegtran-bin": "^7.0.0",
+    "lqip": "^2.1.0"
   }
 }
