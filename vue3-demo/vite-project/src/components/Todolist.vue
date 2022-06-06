@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <input type="text" v-model="title" @keydown.enter="addTodo">
     <ul v-if="todos.length">
       <li v-for="todo in todos">
