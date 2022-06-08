@@ -5,6 +5,7 @@ import {
 
 import Home from "../pages/home.vue";
 import About from "../pages/about.vue";
+import Width from "../pages/width.vue";
 
 const routes = [
   {
@@ -16,6 +17,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About
+  },
+  {
+    path: '/width',
+    name: 'Width',
+    component: Width
   }
 ];
 
