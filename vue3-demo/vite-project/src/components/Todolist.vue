@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Dustbin ref='dustbin' />
     <transition name="modal">
       <div class="info-wrapper" v-if="showModal">
         <div class="info">
@@ -13,6 +14,7 @@
         <li v-for="todo in todos" :key="todo.title">
           <input type="checkbox" v-model="todo.done" />
           <span :class="{ done: todo.done }"> {{ todo.title }}</span>
+          <span class="remove-btn" @click="removeTodo($event, i)">❌</span>
         </li>
       </transition-group>
     </ul>
@@ -20,9 +22,11 @@
 </template>
 <script setup>
 import { ref } from 'vue';
+import Dustbin from './Dustbin.vue';
 let title = ref('');
 let todos = ref([{ title: '1', done: false }]);
 let showModal = ref(false);
+const dustbin = ref(null)
 
 function addTodo() {
   if (!title.value) {
@@ -38,6 +42,12 @@ function addTodo() {
     done: false,
   });
   title.value = '';
+}
+
+function removeTodo(e, i) {
+  todos.value.splice(i, 1);
+  console.log(dustbin.value);
+  dustbin.value.removeTodo(e);
 }
 </script>
 <style>
