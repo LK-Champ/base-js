@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./vue3.0.js"></script>
+  <!-- <script src="//unpkg.com/vue@3.0.11/dist/vue.global.js"></script> -->
+
+</head>
+
+<body>
+  <div id="app">
+    <div>原始 count 值：{{count}}</div>
+    <div>computed count 值：{{newCount}}</div>
+    <button type="primary" @click="addCount"> count ++</button>
+  </div>
+  <script>
+    Object.assign(window, Vue);
+    const component = {
+      setup() {
+        const data = reactive({
+          count: 1,
+        });
+        const newCount = computed(() => {
+          return data.count;
+        }, {
+          onTrack(e) {
+            console.log(1, e);
+          },
+          onTrigger(e) {
+            console.log(2, e);
+          }
+        });
+
+        function addCount() {
+          data.count ++;
+        }
+
+        const dataRef = toRefs(data);
+        console.log(dataRef);
+
+        return {
+          newCount,
+          addCount,
+          ...dataRef,
+        };
+      }
+    }
+    const app = createApp(component).mount('#app');
+  </script>
+</html>
