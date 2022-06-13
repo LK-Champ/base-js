@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Provide Vue3.0</title>
+  <script src="./vue3.0.js"></script>
+
+</head>
+<body>
+  <div id="app"></div>
+</body>
+<script>
+  const app = Vue.createApp({})
+
+  app.component('todo-list', {
+    data() {
+      return {
+        todos: ['Feed a cat', 'Buy tickets']
+      }
+    },
+    provide: {
+      user: 'John Doe'
+    },
+    template: `
+      <div>
+        {{ todos.length }}
+        <!-- 模板的其余部分 -->
+        <todo-list-statistics />
+      </div>
+    `
+  })
+
+  app.component('todo-list-statistics', {
+    inject: ['user'],
+    created() {
+      console.log(`Injected property: ${this.user}`) // > 注入的 property: John Doe
+    }
+  })
+
+  app.mount('#app')
+</script>
+</html>

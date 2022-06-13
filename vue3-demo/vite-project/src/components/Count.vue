@@ -1,15 +1,22 @@
 <template>
-  <button @click="add">新增</button>
-  <div >{{ count }}</div>
+    <div>{{ count }} *2 = {{ double }}</div>
+    <button @click="add">add</button>
+    <button @click="asyncAdd">async add</button>
 </template>
+
 <script setup>
-import { computed } from 'vue';
-import { useStore } from 'vuex';
+import { computed } from 'vue'
+// import {useStore} from 'vuex'
+import { useStore } from '../store/gvuex'
+let store = useStore()
+let count = computed(() => store.state.count)
+let double = computed(() => store.getters.double)
 
-let store = useStore();
-let count = computed(() => store.state.count);
-
+function asyncAdd() {
+    store.dispatch('asyncAdd')
+}
 function add() {
-  store.commit('add')
+    // count.value+=1
+    store.commit('add')
 }
 </script>
